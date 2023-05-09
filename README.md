@@ -66,11 +66,12 @@ print(df_new)
 
 # OUTPUT
 
-![image](https://user-images.githubusercontent.com/118361409/237005708-aa836d9c-b7f8-426c-b11c-822f87dc4efe.png)
+![image](https://user-images.githubusercontent.com/118361409/237010820-beccf1b9-dedd-4b3e-bfde-fd4ba14c33e0.png)
 
-![image](https://user-images.githubusercontent.com/118361409/237005751-9788217d-5229-4cc3-9c70-d8081a6a1f28.png)
+![image](https://user-images.githubusercontent.com/118361409/237010924-464baccf-7dd2-442d-ad0b-c2879da42be5.png)
 
-![image](https://user-images.githubusercontent.com/118361409/237005920-bfa32e78-2420-476e-a827-cc7e8423da17.png)
+![image](https://user-images.githubusercontent.com/118361409/237010961-f0cf7722-19eb-4c5a-9a0d-9c696dd9ef12.png)
+
 
 
 
@@ -83,12 +84,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 df = pd.read_csv("CarPrice.csv")
 df
-df.isnull().sum()
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_selection import SelectKBest, f_regression
 from sklearn.ensemble import ExtraTreesRegressor
-df = df.drop(['car_ID', 'CarName'], axis=1)
+df = df.drop(['car_ID','CarName'], axis=1)
 le = LabelEncoder()
 df['fueltype'] = le.fit_transform(df['fueltype'])
 df['aspiration'] = le.fit_transform(df['aspiration'])
@@ -99,7 +99,8 @@ df['enginelocation'] = le.fit_transform(df['enginelocation'])
 df['enginetype'] = le.fit_transform(df['enginetype'])
 df['cylindernumber'] = le.fit_transform(df['cylindernumber'])
 df['fuelsystem'] = le.fit_transform(df['fuelsystem'])
- df.iloc[:, -1]
+X = df.iloc[:, :-1]
+y = df.iloc[:, -1]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,
 random_state=1)
 print("Univariate Selection")
@@ -113,19 +114,19 @@ importance = model.feature_importances_
 indices = np.argsort(importance)[::-1]
 selected_features = X_train.columns[indices][:10]
 df_new = pd.concat([X_train[selected_features], y_train], axis=1)
-df_new.to_csv('CarPrice_new.csv', index=False)
-print(df_new)X = df.iloc[:, :-1]
-y =
+df_new.to_csv('CarPrice.csv', index=False)
+print(df_new)
 
 ```
 
  OUTPUT
  
-![image](https://user-images.githubusercontent.com/118361409/237007096-500102c5-4d7d-4947-901e-84c9aa09b7f5.png)
+![image](https://user-images.githubusercontent.com/118361409/237011012-4bf697cf-6edd-439e-af6c-d094521aca8a.png)
 
-![image](https://user-images.githubusercontent.com/118361409/237007259-d647b844-faa8-4925-8a6e-70deccb98ba1.png)
+![image](https://user-images.githubusercontent.com/118361409/237011088-715900fd-c164-4938-bde9-be053d3b9539.png)
 
-![image](https://user-images.githubusercontent.com/118361409/237007296-93aa6f3d-f19d-40f1-ac44-24439169ae84.png)
+![image](https://user-images.githubusercontent.com/118361409/237011119-437543a7-d694-4eff-bf4d-3a2fe390e662.png)
+
 
 
 
